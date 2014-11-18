@@ -1,6 +1,23 @@
+/*
+|-------------------------------------------------------------------------------
+| Name: Frame.cpp
+| Author: Imron Rosdiana
+| Modified by: 2014-11-18
+| Created: 2014-10-05
+| Copyright: (C) Copyright 2014, Imron Rosdiana
+| Licence: GPL (General Public License) V.3
+*/
+
 #include "Frame.h"
 
 using namespace std;
+
+/*
+|-------------------------------------------------------------------------------
+| This application is using for fix hidden file/folder after malware attack.
+| MainFrame constructor is to initialize main of view applications
+| such as menubar, button, and status bar.
+*/
 
 MainFrame::MainFrame(const wxString& title)
 : wxFrame(NULL, -1, title, wxDefaultPosition, wxSize(300, 200),
@@ -57,18 +74,25 @@ wxSYSTEM_MENU | wxMINIMIZE_BOX | wxCLOSE_BOX | wxCAPTION | wxCLIP_CHILDREN)
 	Centre();
 }
 
-BEGIN_EVENT_TABLE(MainFrame, wxFrame)
+wxBEGIN_EVENT_TABLE(MainFrame, wxFrame)
 	EVT_MENU(wxID_EXIT, MainFrame::OnQuit)
 	EVT_MENU(wxID_ABOUT, MainFrame::OnAbout)
 	EVT_MENU(MENU_AppAbout, MainFrame::OnAboutApp)
 	EVT_BUTTON(wxID_EXIT, MainFrame::OnQuit)
 	EVT_BUTTON(BUTTON_Ok, MainFrame::ProcessFix)
-END_EVENT_TABLE()
+wxEND_EVENT_TABLE()
 
 void MainFrame::OnQuit(wxCommandEvent& event)
 {
 	Close(true);
 }
+
+/*
+|-------------------------------------------------------------------------------
+| This function is a main command to fix drive letter after malware attack
+| by using command attrib -s -h -a /s /d <drive letter>:\*.*.
+| If drive letter is not detected, so the apps popup alert.
+*/
 
 void MainFrame::ProcessFix(wxCommandEvent& event)
 {
@@ -77,7 +101,7 @@ void MainFrame::ProcessFix(wxCommandEvent& event)
 	// attrib -s -h -a /s /d <drive letter>:\*.*
 
 	try {
-		wxExecute("attrib -s -h -a /s /d " + drive + "*.*");
+		wxExecute("attrib -s -h -a /s /d " + drive + "*.*", wxEXEC_HIDE_CONSOLE);
 		wxMessageBox(wxT("Success."), wxT("Message"), wxOK | wxICON_INFORMATION);
 	}
 	catch (exception& e) {
@@ -85,12 +109,26 @@ void MainFrame::ProcessFix(wxCommandEvent& event)
 	}
 }
 
+/*
+|-------------------------------------------------------------------------------
+| This is about wxwidgets. Wxwidgets is library for create this apps
+| This applications using wxwidgets version 3.0.2, more info you can read
+| in here https://www.wxwidgets.org
+*/
+
 void MainFrame::OnAbout(wxCommandEvent& event)
 {
 	wxMessageBox(wxT("This application using wxWidgets\n(c) 1999-2001 Vadim Zeitlin"),
 		wxT("About wxWidgets"),
 		wxOK | wxICON_INFORMATION);
 }
+
+/*
+|-------------------------------------------------------------------------------
+| This is about applications. Applications is created by Imron Rosdiana.
+| You can follow me on twitter @imronrosdiana, or my site at 
+| http://www.imron02.wordpress.com.
+*/
 
 void MainFrame::OnAboutApp(wxCommandEvent& event)
 {
@@ -101,7 +139,7 @@ void MainFrame::OnAboutApp(wxCommandEvent& event)
 	info.SetDescription(wxT("This application can show hidding folder after malware attack"));
 	info.SetCopyright(wxT("(C) 2014 Imron02 dev"));
 	info.AddDeveloper(wxT("Imron Rosdiana"));
-	info.SetWebSite(wxT("http://www.imron02.wordpress.com/"), wxT("Imron Rosdiana Site"));
+	info.SetWebSite(wxT("http://www.imron02.wordpress.com"), wxT("Imron Rosdiana Site"));
 
 	wxAboutBox(info, this);
 }
