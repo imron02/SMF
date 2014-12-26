@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>resources/app.ico</file>
+        <file>resources/bookmark.png</file>
+        <file>resources/exit.png</file>
+    </qresource>
+</RCC>
