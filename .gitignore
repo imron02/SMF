@@ -27,12 +27,5 @@
 *.out
 *.app
 
-# Directory Compile
-Debug/
-Release/
-
-# Visual Studio
-*.suo
-*.sdf
-*.aps
-*.vcxproj.*
+# Qt
+*.pro.user
