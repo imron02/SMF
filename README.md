@@ -10,7 +10,7 @@ Please see our [wiki page](https://github.com/imron02/SMF/wiki) for information 
 ## Building and Usage
 
  - [Download and Compile](https://github.com/imron02/SMF/wiki)
- - [Tutorial]()
+ - [Tutorial](https://github.com/imron02/SMF/wiki/How-to-use)
 
 ## License
 
